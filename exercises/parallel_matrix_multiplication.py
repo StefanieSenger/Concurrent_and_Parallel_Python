@@ -49,7 +49,7 @@ def par_matrix_multiply(A, B):
         )
 
     results = Parallel(n_jobs=-1)(
-        delayed(matrix_mult_generator)(A, B, i, j)
+        delayed(do_the_work)(A, B, i, j)
         for i in range(num_rows_A)
         for j in range(num_cols_B)
     )
@@ -65,7 +65,7 @@ def par_matrix_multiply(A, B):
     return C
 
 
-def matrix_mult_generator(A, B, i, j):
+def do_the_work(A, B, i, j):
     num_cols_A = len(A[0])
     result = 0
     for k in range(num_cols_A):
